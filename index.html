@@ -1,722 +1,455 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="A simple, single-file HTML blog." />
+  <title>Notes</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#111a33;
+      --text:#e8ecff;
+      --muted:#a9b3d6;
+      --line:rgba(255,255,255,.12);
+      --accent:#7aa2ff;
+      --accent2:#66f0c1;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --max: 1080px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:
+        radial-gradient(1000px 600px at 20% -10%, rgba(122,162,255,.35), transparent 55%),
+        radial-gradient(900px 500px at 100% 10%, rgba(102,240,193,.20), transparent 55%),
+        radial-gradient(700px 500px at 50% 120%, rgba(122,162,255,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ text-decoration:underline; text-underline-offset:3px; }
+
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,16,32,.85), rgba(11,16,32,.35));
+      border-bottom:1px solid var(--line);
+    }
+    .topbar{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 8px 20px rgba(122,162,255,.25);
+      flex: 0 0 auto;
+    }
+    .brand h1{ font-size:16px; margin:0; letter-spacing:.3px; font-weight:650; }
+    .brand small{ display:block; color:var(--muted); font-size:12px; margin-top:1px; }
+
+    nav{ display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      color:var(--muted);
+    }
+    nav a:hover{ border-color:var(--line); color:var(--text); text-decoration:none; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 18px 60px; }
+    .card{
+      background: rgba(17,26,51,.70);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:16px;
+    }
+    .hero-main{ padding:22px; }
+    .hero-main h2{ margin:0 0 8px; font-size:22px; }
+    .hero-main p{ margin:0; color:var(--muted); }
+
+    .hero-side{ padding:18px; display:flex; flex-direction:column; gap:12px; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+    }
+    .pill strong{ color:var(--text); font-weight:650; }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      font-weight:650;
+      cursor:pointer;
+      text-decoration:none !important;
+    }
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(122,162,255,.95), rgba(102,240,193,.75));
+      color:#06101a;
+    }
+    .btn:hover{ filter:brightness(1.05); }
+
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr .42fr;
+      gap:16px;
+      align-items:start;
+    }
+    main.posts{ padding:18px; }
+    .posts h3{ margin:4px 0 14px; font-size:16px; color:var(--muted); font-weight:650; }
+    .post-list{ display:grid; gap:12px; }
+
+    .post-item{
+      padding:14px 14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background: rgba(255,255,255,.02);
+    }
+    .post-item:hover{ background: rgba(255,255,255,.035); }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:6px;
+    }
+    .tag{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:2px 8px;
+      font-size:12px;
+      color:var(--muted);
+      display:inline-block;
+    }
+    .post-item h4{ margin:4px 0 8px; font-size:16px; }
+    .post-item p{ margin:0; color:var(--muted); }
+
+    aside{ padding:18px; position:sticky; top:78px; }
+    aside h3{ margin:0 0 10px; font-size:14px; color:var(--muted); font-weight:650; }
+    .box{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background: rgba(255,255,255,.02);
+      margin-bottom:12px;
+    }
+    .box .muted{ color:var(--muted); font-size:13px; margin:6px 0 0; }
+    .kvs{ display:grid; gap:8px; margin-top:10px; }
+    .kv{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:13px; }
+    .kv b{ color:var(--text); font-weight:650; }
+
+    article.post{
+      margin-top:16px;
+      padding:22px;
+    }
+    article.post h2{ margin:0 0 6px; font-size:22px; }
+    article.post .meta{ margin:0 0 12px; }
+    article.post p{ margin:10px 0; color:rgba(232,236,255,.92); }
+    article.post hr{ border:none; border-top:1px solid var(--line); margin:18px 0; }
+
+    pre{
+      margin:12px 0;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.35);
+      overflow:auto;
+      font-family: var(--mono);
+      font-size:13px;
+      line-height:1.55;
+    }
+    code{ font-family: var(--mono); }
+
+    .quote{
+      margin:12px 0;
+      padding:12px 14px;
+      border-left:4px solid rgba(122,162,255,.7);
+      background: rgba(122,162,255,.08);
+      border-radius: 12px;
+      color: rgba(232,236,255,.95);
+    }
+
+    footer{
+      margin-top:22px;
+      padding:18px 0 0;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+    }
+    .small{ font-size:12px; color:var(--muted); }
+
+    @media (max-width: 920px){
+      .hero{ grid-template-columns:1fr; }
+      .grid{ grid-template-columns:1fr; }
+      aside{ position:static; }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Notes</h1>
+        <small>thoughts, small builds, and lessons</small>
+      </div>
+    </div>
+
+    <nav aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#posts">Posts</a>
+      <a href="#about">About</a>
+      <a href="#subscribe">Subscribe</a>
+    </nav>
+  </div>
+</header>
+
+<div id="home" class="wrap">
+  <section class="hero">
+    <div class="card hero-main">
+      <h2>Hi — thanks for stopping by.</h2>
+      <p>
+        This is a single-file HTML blog: a post list, in-page post anchors, a sidebar,
+        and some nice typography. No build step, no dependencies.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="#posts">Read the latest</a>
+        <a class="btn" href="#post-1">Jump to newest</a>
+        <a class="btn" href="#subscribe">Subscribe</a>
+      </div>
+
+      <p class="small" style="margin-top:10px;">
+        Save as <code>index.html</code> → open locally, or upload to any static host.
+      </p>
+    </div>
+
+    <div class="card hero-side">
+      <div class="pill"><strong>Focus</strong> writing + making</div>
+      <div class="pill"><strong>Style</strong> calm, practical</div>
+      <div class="pill"><strong>Format</strong> simple HTML</div>
+      <div class="pill"><strong>Updated</strong> whenever there’s something worth sharing</div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <main id="posts" class="card posts">
+      <h3>Latest posts</h3>
+
+      <div class="post-list">
+        <a class="post-item" href="#post-1">
+          <div class="meta">
+            <span>Feb 27, 2026</span>
+            <span>·</span>
+            <span>5 min read</span>
+            <span class="tag">HTML</span>
+            <span class="tag">Basics</span>
+          </div>
+          <h4>A “good enough” blog in plain HTML</h4>
+          <p>Structure first: a clean index, readable posts, and anchor links that just work.</p>
+        </a>
+
+        <a class="post-item" href="#post-2">
+          <div class="meta">
+            <span>Feb 20, 2026</span>
+            <span>·</span>
+            <span>7 min read</span>
+            <span class="tag">Writing</span>
+            <span class="tag">Notes</span>
+          </div>
+          <h4>A lightweight writing template</h4>
+          <p>Title, summary, bullets, close — the smallest structure that keeps things clear.</p>
+        </a>
+
+        <a class="post-item" href="#post-3">
+          <div class="meta">
+            <span>Feb 10, 2026</span>
+            <span>·</span>
+            <span>3 min read</span>
+            <span class="tag">Life</span>
+            <span class="tag">Review</span>
+          </div>
+          <h4>A simple weekly reset checklist</h4>
+          <p>Quick reflection prompts that turn “thinking about it” into “doing something.”</p>
+        </a>
+      </div>
+    </main>
+
+    <aside class="card">
+      <h3>Sidebar</h3>
+
+      <div class="box">
+        <b>Quick links</b>
+        <div class="kvs">
+          <div class="kv"><span>📌 Newest</span><b><a href="#post-1">Open</a></b></div>
+          <div class="kv"><span>🏷️ Tags</span><b><a href="#tags">Browse</a></b></div>
+          <div class="kv"><span>👤 About</span><b><a href="#about">Read</a></b></div>
         </div>
-    </header>
+      </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
+      <div class="box" id="tags">
+        <b>Tags</b>
+        <p class="muted" style="margin-top:10px;">
+          <a class="tag" href="#post-1">HTML</a>
+          <a class="tag" href="#post-2">Writing</a>
+          <a class="tag" href="#post-3">Review</a>
+          <a class="tag" href="#post-1">Basics</a>
+          <a class="tag" href="#post-2">Notes</a>
+        </p>
+      </div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="box">
+        <b>About this site</b>
+        <p class="muted">
+          A tiny blog you can host anywhere. If you want multiple pages later, split each post into its own HTML file.
+        </p>
+      </div>
+    </aside>
+  </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Posts (in-page anchors) -->
+  <article id="post-1" class="card post">
+    <h2>A “good enough” blog in plain HTML</h2>
+    <div class="meta">
+      <span>Feb 27, 2026</span><span>·</span><span>Category: Tech</span><span>·</span>
+      <span class="tag">HTML</span> <span class="tag">Basics</span>
+    </div>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+    <p>
+      You don’t need a framework to publish. For a personal blog, a clear structure gets you 90% of the way there:
+      an index list, readable posts, and links that never break.
+    </p>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <div class="quote">
+      Tip: give each post an id like <code>post-1</code> and link with <code>href="#post-1"</code>.
+      It’s fast, reliable, and works offline.
+    </div>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+    <hr />
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+    <p>Here’s the smallest post structure:</p>
+    <pre><code>&lt;article id="post-42"&gt;
+  &lt;h2&gt;Post title&lt;/h2&gt;
+  &lt;div class="meta"&gt;Date · Category · Tags&lt;/div&gt;
+  &lt;p&gt;Your content...&lt;/p&gt;
+&lt;/article&gt;</code></pre>
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+    <p>
+      If you ever want “real” post pages, just copy a post into its own file and link to it.
+      Same content, zero rewrites.
+    </p>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+    <p class="small">Back to <a href="#posts">posts</a> · <a href="#home">top</a></p>
+  </article>
+
+  <article id="post-2" class="card post">
+    <h2>A lightweight writing template</h2>
+    <div class="meta">
+      <span>Feb 20, 2026</span><span>·</span><span>Category: Writing</span><span>·</span>
+      <span class="tag">Writing</span> <span class="tag">Notes</span>
+    </div>
+
+    <p><strong>Title:</strong> say what problem this post solves.</p>
+    <p><strong>Summary:</strong> 2–3 sentences: context → approach → outcome.</p>
+    <p><strong>Bullets:</strong> 3–5 points the reader can act on.</p>
+    <p><strong>Close:</strong> the next step (try it, bookmark it, reply with a question).</p>
+
+    <hr />
+
+    <p>Quick prompt list:</p>
+    <ul>
+      <li>What changed my mind?</li>
+      <li>What would I do differently next time?</li>
+      <li>What’s the simplest version of this idea?</li>
+    </ul>
+
+    <p class="small">Back to <a href="#posts">posts</a> · <a href="#home">top</a></p>
+  </article>
+
+  <article id="post-3" class="card post">
+    <h2>A simple weekly reset checklist</h2>
+    <div class="meta">
+      <span>Feb 10, 2026</span><span>·</span><span>Category: Life</span><span>·</span>
+      <span class="tag">Life</span> <span class="tag">Review</span>
+    </div>
+
+    <ul>
+      <li>What were the 3 best things this week?</li>
+      <li>What drained my time or energy most?</li>
+      <li>What’s one priority for next week?</li>
+      <li>What are 3 actions that make it real?</li>
+    </ul>
+
+    <p class="small">Back to <a href="#posts">posts</a> · <a href="#home">top</a></p>
+  </article>
+
+  <!-- About / Subscribe -->
+  <section id="about" class="card post">
+    <h2>About</h2>
+    <p>
+      A short bio goes here. Keep it human: what you’re learning, what you’re building,
+      and why you write.
+    </p>
+    <p class="small">Suggestion: 2–4 sentences is plenty.</p>
+  </section>
+
+  <section id="subscribe" class="card post">
+    <h2>Subscribe</h2>
+    <p>
+      With no backend, the simplest “subscribe” is email. Replace the address below with yours.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:you@example.com?subject=Subscribe&body=Hi! I'd like to subscribe to your updates.">Email me</a>
+      <a class="btn" href="#home">Back to top</a>
+    </div>
+    <p class="small">Replace <code>you@example.com</code> with your email.</p>
+  </section>
+
+  <footer>
+    <div>© <span id="y">2026</span> — Notes</div>
+    <div class="small">Plain HTML · single file · deploy anywhere</div>
+  </footer>
+</div>
+
+<script>
+  // Optional: auto-update year. Remove if you want zero JS.
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 </body>
-
 </html>
